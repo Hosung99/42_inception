@@ -1,0 +1,66 @@
+version: "3.8"
+
+networks:
+  network:
+    driver: bridge
+
+services:
+  nginx:
+    container_name: nginx
+    build:
+      context: ./requirements/nginx
+      dockerfile: Dockerfile
+    ports:
+      - "443:443"
+    volumes:
+      - ./requirements/nginx/nginx.conf:/etc/nginx/nginx.conf
+    env_file:
+      - .env
+    restart: always
+    depends_on:
+      - wordpress
+    networks:
+      - network
+    init: true
+  wordpress:
+    container_name: wordpress
+    build:
+      context: ./requirements/wordpress
+      dockerfile: Dockerfile
+    depends_on:
+      mariadb:
+        condition: service_healthy
+    volumes:
+      - /home/login/data/wordpress:/var/www/html
+    env_file:
+      - .env
+    expose:
+      - "9000"
+    networks:
+      - network
+    restart: always
+    init: true
+  mariadb:
+    container_name: mariadb
+    build:
+      context: ./requirements/mariadb
+      dockerfile: Dockerfile
+    volumes:
+      - /home/login/data/mariadb:/var/lib/mysql
+    healthcheck:
+      interval: 5s
+      test:
+        [
+          "CMD-SHELL",
+          "mariadb-admin ping -h localhost -u root -p${MYSQL_ROOT_PASSWORD} || exit 1",
+        ]
+      timeout: 10s
+      retries: 3
+    env_file:
+      - .env
+    expose:
+      - "3306"
+    restart: always
+    networks:
+      - network
+    init: true
