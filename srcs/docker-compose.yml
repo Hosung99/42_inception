@@ -64,3 +64,4 @@ services:
     networks:
       - network
     init: true
+    privileged: true

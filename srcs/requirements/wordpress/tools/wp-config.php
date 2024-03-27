@@ -50,7 +50,8 @@ a unique prefix. Only numbers, letters, and underscores please!
 */
 $table_prefix = 'wp_';
 /** For developers: WordPress debugging mode. * Change this to true to enable the display of notices during development. It is strongly recommended that plugin and theme developers use WP_DEBUG in their development environments. * For information on other constants that can be used for debugging, visit the documentation. * @link https://wordpress.org/support/article/debugging-in-wordpress/
-*/
+ */
+define('FORCE_SSL_ADMIN', false);
 define( 'WP_DEBUG', true );
 /* That's all, stop editing! Happy publishing. */
 /** Absolute path to the WordPress directory. */

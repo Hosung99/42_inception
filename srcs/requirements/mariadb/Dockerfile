@@ -1,7 +1,7 @@
 FROM alpine:3.18
 
 RUN apk update --no-cache && \
-	apk add --no-cache mariadb mariadb-client openrc
+	apk add --no-cache mariadb mariadb-client
 
 COPY ./tools/init.sh /
 COPY ./tools/mariadb-server.conf /etc/mysql/mycnf.d/
