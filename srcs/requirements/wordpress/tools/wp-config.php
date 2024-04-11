@@ -10,13 +10,18 @@
 */
 // ** MySQL settings - You can get this info from your web host ** //
 /** The name of the database for WordPress */
-define('WP_HOME','https://seoson.42.fr');
-define('WP_SITEURL','https://seoson.42.fr');
-define( 'DB_NAME', 'Wordpress' );
+$WP_SITE = getenv("WP_SITE");
+$DB_NAME = getenv("MYSQL_DB_NAME");
+$DB_USER = getenv("MYSQL_ROOT_USER");
+$DB_PASSWORD = getenv("MYSQL_ROOT_PASSWORD");
+
+define('WP_HOME', $WP_SITE );
+define('WP_SITEURL', $WP_SITE );
+define( 'DB_NAME', $DB_NAME );
 /** MySQL database username */
-define( 'DB_USER', 'root' );
+define( 'DB_USER', $DB_USER );
 /** MySQL database password */
-define( 'DB_PASSWORD', 'secret');
+define( 'DB_PASSWORD', $DB_PASSWORD);
 /** MySQL hostname */
 define( 'DB_HOST', 'mariadb' );
 /** Database Charset to use in creating database tables. */

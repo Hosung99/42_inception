@@ -1,8 +1,10 @@
 #!/bin/sh
 
+openrc default
+
 /etc/init.d/mariadb setup
 
-/usr/bin/mysqld_safe --datadir='/var/lib/mysql'
+rc-service mariadb start
 
 echo "
 	create database if not exists $MYSQL_DB_NAME;
@@ -14,6 +16,6 @@ echo "
 
 mysql -u root < create_wordpressdb_user.sql
 
-mysqladmin -u root -p $MYSQL_ROOT_PASSWORD shutdown
+rc-service mariadb stop
 
 /usr/bin/mysqld_safe

@@ -12,6 +12,6 @@ COPY ./tools/wp-config.php /
 COPY --chmod=644 ./tools/www.conf /etc/php81/php-fpm.d/www.conf
 
 RUN chmod +x /init.sh
-RUN chmod +x /wp-config.php
+RUN chmod -R 777 /wp-config.php
 
 CMD ["/init.sh"]

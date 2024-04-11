@@ -26,12 +26,8 @@ wp core install \
 	--skip-email \
 	--allow-root
 
-wp user create ${WP_USER} ${WP_USER_EMAIL} --user_pass=${WP_USER_PASSWORD} --allow-root --role=author
+wp user create ${WP_USER} ${WP_USER_EMAIL} --user_pass=${WP_USER_PASSWORD}
 
 chmod -R 777 /var/www
-
-rm -rf wp-config.php
-
-mv /wp-config.php /var/www/wp-config.php
 
 php-fpm81 -F

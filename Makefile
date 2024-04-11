@@ -8,6 +8,8 @@ clean :
 
 fclean :
 	docker compose -f ./srcs/docker-compose.yml down -v
+	docker system prune
+	docker image prune -a
 
 re : fclean all
 
